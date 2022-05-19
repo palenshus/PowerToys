@@ -1,0 +1,13 @@
+{
+    "ID": "?",
+    "ActionKeyword": "O:",
+    "IsGlobal": false,
+    "Name": "OneNote",
+    "Author": "palenshus",
+    "Version": "1.0.0",
+    "Language": "csharp",
+    "Website": "https://aka.ms/powertoys",
+    "ExecuteFileName": "Microsoft.PowerToys.Run.Plugin.OneNote.dll",
+    "IcoPathDark": "Images\\oneNote.dark.png",
+    "IcoPathLight": "Images\\oneNote.light.png"
+}
