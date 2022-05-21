@@ -1,0 +1,13 @@
+{
+  "ID": "87831B96C4CC4CBD9F2397FFBB1F12E1",
+  "ActionKeyword": "g:",
+  "Name": "Microsoft Graph",
+  "Author": "palenshus",
+  "Version": "1.0.0",
+  "Language": "csharp",
+  "Website": "https://aka.ms/powertoys",
+  "ExecuteFileName": "Microsoft.PowerToys.Run.Plugin.Graph.dll",
+  "IsGlobal": false,
+  "IcoPathDark": "Images\\graph.dark.png",
+  "IcoPathLight": "Images\\graph.light.png"
+}
