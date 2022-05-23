@@ -3,6 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
+using System.Runtime.Caching;
 using System.Windows.Media.Imaging;
 using ManagedCommon;
 using Microsoft.Graph;
@@ -21,6 +23,8 @@ namespace Microsoft.PowerToys.Run.Plugin.Graph
         /// </summary>
         private readonly GraphServiceClient? _graphClient;
 
+        private readonly FileCache _cache;
+
         /// <summary>
         /// The initial context for this plugin (contains API and meta-data)
         /// </summary>
@@ -38,6 +42,7 @@ namespace Microsoft.PowerToys.Run.Plugin.Graph
         {
             UpdateIconPath(Theme.Light);
             _graphClient = GraphHelper.GetGraphClient("d3590ed6-52b3-4102-aeff-aad2292ab01c", new[] { "People.Read" });
+            _cache = new FileCache();
         }
 
         /// <summary>
@@ -154,9 +159,31 @@ namespace Microsoft.PowerToys.Run.Plugin.Graph
 
         private BitmapImage GetPhoto(string id)
         {
-            var request = _graphClient!.Users[id].Photos["48x48"].Content.Request();
-            using var stream = request.GetAsync().Result;
+            byte[] bytes = GetFromCache(
+                id,
+                () =>
+                {
+                    var request = _graphClient!.Users[id].Photos["48x48"].Content.Request();
+                    using var stream = request.GetAsync().Result as MemoryStream;
+                    var bytes = stream!.ToArray();
+                    return bytes;
+                },
+                TimeSpan.FromDays(7));
+
+            using MemoryStream stream = new (bytes);
             return StreamToBitmapImage(stream);
+        }
+
+        private T GetFromCache<T>(string key, Func<T> valueFactory, TimeSpan expiration)
+        {
+            var value = (T)_cache[key];
+            if (value is null)
+            {
+                value = valueFactory();
+                _cache.Add(key, value, DateTimeOffset.Now.Add(expiration));
+            }
+
+            return value;
         }
 
         /// <summary>
