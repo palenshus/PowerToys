@@ -4,6 +4,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.Globalization;
 using System.Runtime.Caching;
 using System.Windows.Media.Imaging;
 using ManagedCommon;
@@ -84,12 +85,20 @@ namespace Microsoft.PowerToys.Run.Plugin.Graph
         /// <returns>A filtered list, can be empty when nothing was found</returns>
         public List<Result> Query(Query query, bool delayedExecution)
         {
-            if (_graphClient is null || query is null || !delayedExecution || string.IsNullOrWhiteSpace(query.Search))
+            if (_graphClient is null || query is null || !delayedExecution)
             {
                 return new List<Result>(0);
             }
 
-            var request = _graphClient.Me.People.Request().Select(p => new
+            var peopleResults = GetPeopleResults(query.Search);
+            var meetingResults = GetMeetingResults(query.Search);
+
+            return peopleResults.Union(meetingResults).ToList();
+        }
+
+        private IList<Result> GetPeopleResults(string query)
+        {
+            var request = _graphClient!.Me.People.Request().Select(p => new
             {
                 p.DisplayName,
                 p.Department,
@@ -100,9 +109,11 @@ namespace Microsoft.PowerToys.Run.Plugin.Graph
                 p.PersonType,
             });
 
-            request.QueryOptions.Add(new QueryOption("search", query.Search));
+            query = string.IsNullOrWhiteSpace(query) ? string.Empty : $"\"{query}\"";
+            request.QueryOptions.Add(new QueryOption("search", query));
 
             var people = request.GetAsync().Result;
+
             return people.Select(p =>
             {
                 var email = p.UserPrincipalName ?? p.ScoredEmailAddresses.FirstOrDefault()?.Address;
@@ -113,16 +124,7 @@ namespace Microsoft.PowerToys.Run.Plugin.Graph
                     QueryTextDisplay = p.DisplayName,
                     Action = (_) =>
                     {
-                        string launchUri;
-                        if (p.PersonType.Class == "Person")
-                        {
-                            launchUri = $"MSTeams:/l/chat/0/0?users={p.UserPrincipalName}";
-                        }
-                        else
-                        {
-                            launchUri = $"mailto:{email}";
-                        }
-
+                        string launchUri = p.PersonType.Class == "Person" ? $"MSTeams:/l/chat/0/0?users={p.UserPrincipalName}" : $"mailto:{email}";
                         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo { UseShellExecute = true, FileName = launchUri });
 
                         return true;
@@ -133,7 +135,8 @@ namespace Microsoft.PowerToys.Run.Plugin.Graph
                 if (p.PersonType.Class == "Person")
                 {
                     result.Icon = () => GetPhoto(p.Id);
-                    result.SubTitle = @$"{p.JobTitle} - {p.Department} - {email} - {p.OfficeLocation}";
+                    var subTitleItems = new[] { p.JobTitle, p.Department, email, p.OfficeLocation };
+                    result.SubTitle = string.Join(" - ", subTitleItems.Where(i => i is not null));
                 }
                 else
                 {
@@ -143,6 +146,108 @@ namespace Microsoft.PowerToys.Run.Plugin.Graph
 
                 return result;
             }).ToList();
+        }
+
+        private IList<Result> GetMeetingResults(string query)
+        {
+            var meetings = GetFromCache(
+                "meetings",
+                () => GetMeetingsFromGraph(DateTime.Now.AddDays(-14), DateTime.Now.AddDays(14)),
+                TimeSpan.FromDays(1));
+
+            return meetings
+                .Where(m => string.IsNullOrWhiteSpace(query)
+                    || m.Subject.ContainsIC(query)
+                    || m.OrganizerEmail.ContainsIC(query)
+                    || m.OrganizerName.ContainsIC(query))
+                .Where(m => !(m.IsAllDay ?? false) || (m.IsCancelled ?? false))
+                .Select(m => new { Meeting = m, Delta = Math.Min(Math.Abs((DateTime.Now - m.Start).TotalMinutes), Math.Abs((DateTime.Now - m.End).TotalMinutes) * 2) })
+                .OrderBy(m => m.Delta)
+                .DistinctBy(m => new { m.Meeting.Subject, m.Meeting.JoinUrl })
+                .Take(10)
+                .Select((meeting, i) =>
+                {
+                    var m = meeting.Meeting;
+                    bool isNow = DateTime.Now > m.Start.AddMinutes(-5) && DateTime.Now < m.End.AddMinutes(5);
+                    string link = isNow ? m.JoinUrl ?? m.WebLink : m.WebLink;
+                    string title = isNow ? $"IN-PROGRESS: {m.Subject}" : m.Subject;
+
+                    var result = new Result
+                    {
+                        Title = title,
+                        QueryTextDisplay = m.Subject,
+                        IcoPath = _iconPath,
+                        SubTitle = @$"Organized by {m.OrganizerName}",
+                        Action = (_) =>
+                        {
+                            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo { UseShellExecute = true, FileName = link });
+
+                            return true;
+                        },
+                        ContextData = m,
+                    };
+
+                    if (isNow)
+                    {
+                        result.Score = 500;
+                    }
+                    else
+                    {
+                        result.Score = (int)Math.Round(500.0 / meeting.Delta);
+                    }
+
+                    return result;
+                })
+                .ToList();
+        }
+
+        private IList<CalendarEvent> GetMeetingsFromGraph(DateTime start, DateTime end)
+        {
+            var viewOptions = new List<QueryOption>
+            {
+                new QueryOption("startDateTime", start.ToString("o")),
+                new QueryOption("endDateTime", end.ToString("o")),
+            };
+
+            var events = _graphClient!.Me
+                    .CalendarView
+                    .Request(viewOptions)
+
+                    // Send user time zone in request so date/time in
+                    // response will be in preferred time zone
+                    .Header("Prefer", $"outlook.timezone=\"{TimeZoneInfo.Local.StandardName}\"")
+                    .Top(100)
+
+                    // Only return fields app will use
+                    .Select(e => new
+                    {
+                        e.Subject,
+                        e.Organizer,
+                        e.Start,
+                        e.End,
+                        e.IsAllDay,
+                        e.IsCancelled,
+                        e.OnlineMeeting,
+                        e.WebLink,
+                    })
+
+                    // Order results chronologically
+                    .OrderBy("start/dateTime")
+                    .GetAsync()
+                    .Result;
+
+            return events.CurrentPage
+                .Select(e => new CalendarEvent(
+                    e.Subject,
+                    e.Organizer.EmailAddress.Name,
+                    e.Organizer.EmailAddress.Address,
+                    e.IsAllDay,
+                    e.IsCancelled,
+                    DateTime.Parse(e.Start.DateTime, CultureInfo.InvariantCulture),
+                    DateTime.Parse(e.End.DateTime, CultureInfo.InvariantCulture),
+                    e.OnlineMeeting?.JoinUrl.Replace("https://teams.microsoft.com", "MSTeams:"),
+                    e.WebLink))
+                .ToList();
         }
 
         private static BitmapImage StreamToBitmapImage(Stream stream)
@@ -170,7 +275,7 @@ namespace Microsoft.PowerToys.Run.Plugin.Graph
                 },
                 TimeSpan.FromDays(7));
 
-            using MemoryStream stream = new (bytes);
+            using MemoryStream stream = new(bytes);
             return StreamToBitmapImage(stream);
         }
 
@@ -208,5 +313,8 @@ namespace Microsoft.PowerToys.Run.Plugin.Graph
         {
             _iconPath = theme == Theme.Light || theme == Theme.HighContrastWhite ? "Images/graph.light.png" : "Images/graph.dark.png";
         }
+
+        [Serializable]
+        public record CalendarEvent(string Subject, string OrganizerName, string OrganizerEmail, bool? IsAllDay, bool? IsCancelled, DateTime Start, DateTime End, string? JoinUrl, string WebLink);
     }
 }

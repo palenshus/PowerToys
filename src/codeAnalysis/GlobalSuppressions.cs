@@ -55,3 +55,5 @@ using System.Diagnostics.CodeAnalysis;
 
 // Code quality
 [assembly: SuppressMessage("CodeQuality", "IDE0076:Invalid global 'SuppressMessageAttribute'", Justification = "Affect predefined supressions.")]
+[assembly: SuppressMessage("Style", "IDE0009:Member access should be qualified.", Justification = "We follow the C# Core Coding Style which avoids using `this` unless absolutely necessary.")]
+[assembly: SuppressMessage("Style", "IDE0065:Misplaced using directive", Justification = "We follow the C# Core Coding Style which puts using statements outside the namespace.")]
