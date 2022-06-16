@@ -93,10 +93,14 @@ namespace Microsoft.PowerToys.Run.Plugin.Graph
             var peopleResults = GetPeopleResults(query.Search);
             var meetingResults = GetMeetingResults(query.Search);
 
-            return peopleResults.Union(meetingResults).ToList();
-        }
+            var results = peopleResults.Union(meetingResults).ToList();
+            return results;
+       }
 
-        private IList<Result> GetPeopleResults(string query)
+        [Serializable]
+        private record PersonRecord(string Id, string DisplayName, string PersonType, string Department, string JobTitle, string OfficeLocation, string? Email, string? UserPrincipalName);
+
+        private IList<PersonRecord> GetPeopleFromGraph(string query)
         {
             var request = _graphClient!.Me.People.Request().Select(p => new
             {
@@ -117,14 +121,35 @@ namespace Microsoft.PowerToys.Run.Plugin.Graph
             return people.Select(p =>
             {
                 var email = p.UserPrincipalName ?? p.ScoredEmailAddresses.FirstOrDefault()?.Address;
+                return new PersonRecord(
+                p.Id,
+                p.DisplayName,
+                p.PersonType.Class,
+                p.Department,
+                p.JobTitle,
+                p.OfficeLocation,
+                email,
+                p.UserPrincipalName);
+            })
+            .ToList();
+        }
 
+        private IList<Result> GetPeopleResults(string query)
+        {
+            var people = GetFromCache(
+                $"people-{query}",
+                () => GetPeopleFromGraph(query),
+                TimeSpan.FromDays(1));
+
+            return people.Select(p =>
+            {
                 var result = new Result
                 {
                     Title = p.DisplayName,
                     QueryTextDisplay = p.DisplayName,
                     Action = (_) =>
                     {
-                        string launchUri = p.PersonType.Class == "Person" ? $"MSTeams:/l/chat/0/0?users={p.UserPrincipalName}" : $"mailto:{email}";
+                        string launchUri = p.PersonType == "Person" ? $"MSTeams:/l/chat/0/0?users={p.UserPrincipalName}" : $"mailto:{p.Email}";
                         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo { UseShellExecute = true, FileName = launchUri });
 
                         return true;
@@ -132,16 +157,16 @@ namespace Microsoft.PowerToys.Run.Plugin.Graph
                     ContextData = p,
                 };
 
-                if (p.PersonType.Class == "Person")
+                if (p.PersonType == "Person")
                 {
                     result.Icon = () => GetPhoto(p.Id);
-                    var subTitleItems = new[] { p.JobTitle, p.Department, email, p.OfficeLocation };
+                    var subTitleItems = new[] { p.JobTitle, p.Department, p.Email, p.OfficeLocation };
                     result.SubTitle = string.Join(" - ", subTitleItems.Where(i => i is not null));
                 }
                 else
                 {
                     result.IcoPath = _iconPath;
-                    result.SubTitle = @$"{email}";
+                    result.SubTitle = @$"{p.Email}";
                 }
 
                 return result;
