@@ -22,6 +22,13 @@ namespace FancyZonesEditor.Models
         {
             Window = new LayoutOverlayWindow();
             Settings = new LayoutSettings();
+
+            // provide a good default for vertical monitors
+            if (monitorSize.Height > monitorSize.Width)
+            {
+                Settings.Type = LayoutType.Rows;
+            }
+
             Device = new Device(workArea, monitorSize);
 
             if (App.DebugMode)
@@ -41,10 +48,10 @@ namespace FancyZonesEditor.Models
             Window.Height = workArea.Height;
         }
 
-        public Monitor(string monitorName, string virtualDesktop, int dpi, Rect workArea, Size monitorSize)
+        public Monitor(string monitorName, string monitorInstanceId, string monitorSerialNumber, string virtualDesktop, int dpi, Rect workArea, Size monitorSize)
             : this(workArea, monitorSize)
         {
-            Device = new Device(monitorName, virtualDesktop, dpi, workArea, monitorSize);
+            Device = new Device(monitorName, monitorInstanceId, monitorSerialNumber, virtualDesktop, dpi, workArea, monitorSize);
         }
 
         public void Scale(double scaleFactor)

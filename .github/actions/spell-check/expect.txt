@@ -5,6 +5,7 @@ abgr
 abi
 ABlocked
 ABOUTBOX
+ABradley
 Abug
 accctrl
 Acceleratorkeys
@@ -76,7 +77,6 @@ apps
 appwindow
 appwiz
 appx
-appxmanifest
 APSTUDIO
 AQS
 Aqtobe
@@ -94,7 +94,6 @@ ARPPRODUCTICON
 ARRAYSIZE
 arsinh
 artanh
-Artboard
 Artsakh
 asdf
 AShortcut
@@ -133,6 +132,7 @@ awakeness
 awakeversion
 AWAYMODE
 AYUV
+azchohfi
 backend
 backtracer
 BADD
@@ -141,18 +141,15 @@ Bashkortostan
 Bayan
 bbwe
 bck
-Bcl
 Belarus
 betadele
 betsegaw
 BGR
 bgra
-BGSOUNDS
 bhid
 Bicubic
 bigbar
 bigobj
-binaryformatter
 binlog
 bitmapimage
 BITMAPINFO
@@ -191,7 +188,6 @@ Bto
 buf
 BUFSIZE
 bugreport
-BUILDARCH
 BUILDNUMBER
 buildtask
 buildtransitive
@@ -245,7 +241,6 @@ CLASSNOTAVAILABLE
 clickable
 clickonce
 CLIENTEDGE
-CLIENTPULL
 clientside
 CLIPCHILDREN
 Clipperton
@@ -270,7 +265,6 @@ cnt
 Cocklebiddy
 coclass
 codebase
-codecvt
 CODENAME
 codeofconduct
 codereview
@@ -301,7 +295,6 @@ comsuppw
 comsuppwd
 comutil
 Concat
-concrt
 configs
 Configurator
 CONFLICTINGMODIFIERKEY
@@ -339,6 +332,7 @@ crlf
 cron
 Crossdevice
 CRSEL
+crutkas
 CSearch
 CSettings
 csharp
@@ -420,10 +414,10 @@ deinitialization
 DELA
 deletethis
 Delimarsky
-delims
 dend
 DENORMAL
 Deondre
+dependabot
 depersist
 deprioritized
 deps
@@ -441,33 +435,25 @@ devblogs
 devdocs
 devenum
 DEVMON
-devops
 devpkey
 DEVSOURCE
 dhcp
-diffing
 difftime
 DIIRFLAG
 dimm
 directshow
 dirs
 DISABLEASACTIONKEY
-dispid
-DISPIDAMBIENTDLCONTROL
 DISPLAYCHANGE
 DISPLAYCONFIG
 displayname
 divyan
-DLACTIVEXCTLS
-DLCONTROL
 Dlg
 DLGFRAME
 DLGMODALFRAME
 dlib
-DLIMAGES
 dllexport
 dllhost
-dllimport
 dllmain
 dlls
 DNLEN
@@ -476,7 +462,6 @@ doctype
 DONOTROUND
 DONTVALIDATEPATH
 dotnet
-DOWNLOADONLY
 DPICHANGED
 DPIs
 DPolicy
@@ -502,9 +487,9 @@ DWINRT
 dwl
 dwm
 dwmapi
-dwmcorei
 DWMCOLORIZATIONCOLORCHANGED
 DWMCOMPOSITIONCHANGED
+dwmcorei
 DWMNCRENDERINGCHANGED
 Dwmp
 DWMSENDICONICLIVEPREVIEWBITMAP
@@ -536,6 +521,7 @@ Emoji
 emptyrecyclebin
 ENABLEDPOPUP
 endforeach
+endian
 endif
 endl
 endpointvolume
@@ -545,9 +531,8 @@ entrypoint
 ENU
 enum
 EOAC
-eol
+EOL
 epicgames
-epo
 Eqn
 ERASEBKGND
 EREOF
@@ -595,7 +580,6 @@ fallthrough
 fancyzones
 FANCYZONESDRAWLAYOUTTEST
 FANCYZONESEDITOR
-FANCYZONESWINDOWSTYLES
 Farbraum
 Faroe
 FARPROC
@@ -621,7 +605,6 @@ Filterkeyboard
 Filterx
 finalizer
 findfast
-findstr
 Firefox
 FIXEDFILEINFO
 FLASHZONES
@@ -634,11 +617,9 @@ FOFX
 FOLDERID
 folderpath
 FORCEMINIMIZE
-FORCEOFFLINE
 foreach
 formatetc
 FRAMECHANGED
-FRAMEDOWNLOAD
 franky
 frankychen
 Froml
@@ -661,7 +642,6 @@ GBs
 GCLP
 gcnew
 gcode
-gcodepreviewhandler
 gdi
 gdiplus
 GDISCALED
@@ -681,7 +661,7 @@ globals
 GNumber
 google
 GPTR
-gsuberland
+GSM
 gtm
 gui
 guiddef
@@ -718,7 +698,6 @@ helptext
 Heure
 HEVC
 hfile
-HFONT
 hglobal
 hhk
 HHmmss
@@ -778,8 +757,8 @@ hstring
 hsv
 htcfreek
 HTHUMBNAIL
-Htmdid
 HTTRANSPARENT
+HValue
 Hvci
 hwb
 HWINEVENTHOOK
@@ -812,11 +791,8 @@ IComparer
 ICompositor
 ICONERROR
 IContext
-ICONWARNING
-ICore
 ICreate
 IData
-IDCANCEL
 IDD
 IDelayed
 IDesktop
@@ -827,7 +803,6 @@ IDispatcher
 IDisposable
 idl
 IDLIST
-IDOK
 IDOn
 IDR
 IDrive
@@ -883,7 +858,6 @@ IMedia
 IMem
 IMessage
 imeutil
-iminstall
 IMoniker
 IMouse
 impl
@@ -895,7 +869,6 @@ INFOEXAMPLE
 Infotip
 ingbuffer
 inheritdoc
-INITDIALOG
 initguid
 Inkscape
 Inlines
@@ -958,7 +931,6 @@ IPublic
 IQuery
 IRead
 IReference
-IReflect
 IRegistered
 IRegistration
 IRegistry
@@ -977,7 +949,6 @@ ISingle
 ISmart
 isocpp
 iss
-IStorage
 IStream
 istreambuf
 istringstream
@@ -1003,12 +974,8 @@ IVector
 IView
 IVirtual
 IWbem
-IWeb
 IWIC
 iwindow
-IWindows
-IWork
-IXaml
 IXml
 IYUV
 IZone
@@ -1016,6 +983,7 @@ IZoom
 JArray
 jarro
 Jarryd
+jefflord
 jfif
 jgeosdfsdsgmkedfgdfgdfgbkmhcgcflmi
 jjw
@@ -1066,7 +1034,6 @@ Kyrgyzstan
 Kyzylorda
 LAlt
 Lambson
-lamotile
 langword
 Lastdevice
 Latn
@@ -1100,7 +1067,6 @@ LIBID
 Lifecycle
 LIGHTORANGE
 LIGHTTURQUOISE
-lightunplated
 lindex
 linkedin
 linq
@@ -1153,6 +1119,7 @@ LPSAFEARRAY
 LPSTR
 lpsz
 lpt
+LPTHREAD
 LPTOP
 lptpm
 LPTSTR
@@ -1179,7 +1146,6 @@ Magadan
 Mainwindow
 majortype
 MAJORVERSION
-makeappx
 makecab
 MAKEINTRESOURCE
 MAKEINTRESOURCEW
@@ -1211,7 +1177,6 @@ MCDT
 MCST
 MDICHILD
 MDL
-mdpreviewhandler
 mdtext
 mdtxt
 mdwn
@@ -1224,8 +1189,6 @@ memset
 MENUBREAK
 MENUITEMINFO
 MENUITEMINFOW
-messageboxes
-METACHARSET
 Metadatas
 metafile
 mfapi
@@ -1252,7 +1215,6 @@ miniz
 minlevel
 MINORVERSION
 Miracast
-mirophone
 Mishkeegogamang
 mjpg
 mkd
@@ -1266,6 +1228,7 @@ mmsystem
 mockapi
 MODECHANGE
 modernwpf
+MODESPRUNED
 Moldova
 Mongala
 MONITORINFO
@@ -1296,22 +1259,18 @@ msdata
 MSDN
 msedge
 MSGFLT
-mshtmdid
 MSIFASTINSTALL
 MSIHANDLE
 msiquery
 MSIRESTARTMANAGERCONTROL
 msix
-msixbundle
 MSIXCA
-MSIXVERSION
 MSLLHOOKSTRUCT
 Mso
 msp
 msrc
 mst
 msvc
-msvcp
 MTND
 Mul
 multiline
@@ -1323,7 +1282,7 @@ Mundrabilla
 mutex
 mutexes
 muxc
-mvvm
+MVVM
 myfile
 MYICON
 MYTZ
@@ -1332,6 +1291,7 @@ nameof
 namespace
 namespaceanddescendants
 Navassa
+naveensrinivasan
 NCACTIVATE
 ncc
 NCCALCSIZE
@@ -1362,10 +1322,8 @@ netcore
 netcoreapp
 netcpl
 netframework
-NETFX
 netsetup
 netsh
-netstandard
 Neue
 newcolor
 newdev
@@ -1414,7 +1372,6 @@ Noronha
 NOSEARCH
 NOSENDCHANGING
 NOSIZE
-notafter
 notfound
 nothrow
 NOTIFICATIONSDLL
@@ -1443,14 +1400,12 @@ NUMLOCK
 NUMPAD
 Nunavut
 Nusa
-Nvidia
 nwc
 NWSE
 Objbase
 OBJID
 objidl
 oblitum
-octodex
 odbc
 odbccp
 Oem
@@ -1484,7 +1439,6 @@ ostringstream
 OSVERSIONINFOEX
 OSVERSIONINFOEXW
 osvi
-otating
 OUTOFCONTEXT
 OUTOFMEMORY
 outpin
@@ -1523,8 +1477,6 @@ PCIDLIST
 PCWSTR
 pdb
 pdbonly
-pde
-pdfpreviewhandler
 pdo
 pdto
 pdtobj
@@ -1566,7 +1518,6 @@ Pohnpei
 popup
 POPUPWINDOW
 posix
-Postion
 powercfg
 powerlauncher
 powerpreview
@@ -1596,7 +1547,6 @@ Prefixer
 Preinstalled
 preload
 PREMULTIPLIED
-preperty
 prevhost
 previewer
 PREVIEWHANDLERFRAMEINFO
@@ -1693,7 +1643,7 @@ rects
 recyclebin
 redirectedfrom
 Redist
-Redistributable
+redistributable
 reencode
 reencoded
 refactor
@@ -1719,8 +1669,6 @@ remappings
 REMAPSUCCESSFUL
 REMAPUNSUCCESSFUL
 Remotable
-REMOTEDISPLAY
-REMOTESESSION
 Removelnk
 renamable
 RENAMEONCOLLISION
@@ -1731,7 +1679,7 @@ requerying
 rescap
 resgen
 resheader
-Resizable
+resizable
 resizers
 resmimetype
 RESOURCEID
@@ -1778,8 +1726,6 @@ RTB
 RTCS
 RTLREADING
 RTSS
-ruleset
-RUNACTIVEXCTLS
 runas
 rundll
 rungameid
@@ -1822,9 +1768,7 @@ Segoe
 Sekan
 SENDCHANGE
 sendvirtualinput
-serializationexception
 serializer
-serizalization
 serverside
 SETCONTEXT
 setcursor
@@ -1839,8 +1783,6 @@ SETTEXT
 SETTINGCHANGE
 settingsheader
 settingshotkeycontrol
-settingsv
-Setttings
 SETWORKAREA
 sfgao
 SFGAOF
@@ -1892,7 +1834,8 @@ siex
 SIGABRT
 sigdn
 SIGNINGSCENARIO
-signtool
+Signtool
+sinclairinat
 SINGLEKEY
 singlekeyremapcontrol
 singletones
@@ -1906,7 +1849,6 @@ SIZENWSE
 sizeof
 sizeread
 SIZEWE
-sketchapp
 SKIPOWNPROCESS
 sku
 SLGP
@@ -1914,13 +1856,13 @@ sln
 SMALLICON
 SMTO
 snd
+snickler
 snwprintf
 softline
 somil
 Soref
 SOURCECLIENTAREAONLY
 SOURCEHEADER
-sourceid
 sourcesdirectory
 spam
 spdisp
@@ -2012,13 +1954,11 @@ subquery
 substr
 Sul
 Superbar
-supressions
 Suri
 sut
 SVE
 SVGIn
 SVGIO
-svgpreviewhandler
 svgz
 SWC
 SWFO
@@ -2039,7 +1979,6 @@ SYSICONINDEX
 SYSKEY
 syskeydown
 SYSKEYUP
-SYSLIB
 syslog
 SYSMENU
 SYSTEMAPPS
@@ -2076,7 +2015,6 @@ Tenggara
 testcase
 testhost
 testprocess
-testtrocess
 testzones
 TEXCOORD
 textblock
@@ -2085,7 +2023,6 @@ THH
 THICKFRAME
 THISCOMPONENT
 THotkey
-thre
 TILEDWINDOW
 timedate
 timediff
@@ -2100,7 +2037,6 @@ TMPVAR
 TNP
 todo
 toggleswitch
-Toolchain
 toolkitcontrols
 toolkitconverters
 Toolset
@@ -2123,7 +2059,6 @@ TRK
 trl
 trunc
 Tshuapa
-tspan
 TStr
 Tuva
 TValue
@@ -2147,7 +2082,7 @@ Udp
 uefi
 UHash
 UIA
-Uid
+uid
 uint
 uintptr
 UIPI
@@ -2189,7 +2124,6 @@ unsubscribe
 unvirtualized
 Updatelayout
 UPGRADINGPRODUCTCODE
-upto
 Uptool
 upvote
 uri
@@ -2216,18 +2150,13 @@ uxtheme
 UYVY
 validmodulename
 vcamp
-vccorlib
 vcdl
 VCINSTALLDIR
 vcm
-vcomp
-vcredist
 VCRT
-vcruntime
 vcvars
 VDesktop
 vdi
-VDId
 vec
 VERBSONLY
 VERBW
@@ -2295,13 +2224,11 @@ wekyb
 Wevtapi
 wformat
 wgpocpl
-Whichdoes
 whitespaces
 WIC
 wifi
 wiki
 wikipedia
-wil
 wildcards
 winapi
 winappdriver
@@ -2310,7 +2237,6 @@ Wincodecsdk
 wincolor
 windef
 windir
-Windowcontrols
 WINDOWCREATED
 WINDOWEDGE
 WINDOWNAME
@@ -2318,8 +2244,6 @@ WINDOWPLACEMENT
 WINDOWPOSCHANGED
 WINDOWPOSCHANGING
 Windowsapp
-windowsappruntimeinstall
-windowsappsdk
 WINDOWSBUILDNUMBER
 Windowscodecs
 windowsdesktop
@@ -2385,7 +2309,7 @@ wpf
 wpr
 wprintf
 wprp
-WQL
+wql
 wregex
 WResize
 writefile
@@ -2410,8 +2334,6 @@ Wwan
 Wwanpp
 xamarin
 XAttribute
-xbf
-XBind
 Xbox
 XBUTTON
 XBUTTONDBLCLK
@@ -2422,7 +2344,6 @@ XDocument
 XElement
 XFile
 XIncrement
-XInstance
 XLoc
 XNamespace
 XOffset
